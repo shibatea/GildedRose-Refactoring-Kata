@@ -4,9 +4,9 @@ namespace csharp
 {
     public class GildedRose
     {
-        const string sulfuras = "Sulfuras, Hand of Ragnaros";
         const string agedBrie = "Aged Brie";
         const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+        const string sulfuras = "Sulfuras, Hand of Ragnaros";
 
         public readonly IList<Item> Items;
 
