@@ -31,7 +31,7 @@ namespace csharp
                 {
                     if (!IsSulfurasItem(item))
                     {
-                        item.Quality = item.Quality - 1;
+                        item.Quality -= 1;
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace csharp
             {
                 if (item.Quality < 50)
                 {
-                    item.Quality = item.Quality + 1;
+                    item.Quality += 1;
 
                     if (IsBackstagePassesItem(item))
                     {
@@ -47,7 +47,7 @@ namespace csharp
                         {
                             if (item.Quality < 50)
                             {
-                                item.Quality = item.Quality + 1;
+                                item.Quality += 1;
                             }
                         }
 
@@ -55,7 +55,7 @@ namespace csharp
                         {
                             if (item.Quality < 50)
                             {
-                                item.Quality = item.Quality + 1;
+                                item.Quality += 1;
                             }
                         }
                     }
@@ -64,7 +64,7 @@ namespace csharp
 
             if (!(IsSulfurasItem(item)))
             {
-                item.SellIn = item.SellIn - 1;
+                item.SellIn -= 1;
             }
 
             if (item.SellIn < 0)
@@ -77,20 +77,20 @@ namespace csharp
                         {
                             if (!(IsSulfurasItem(item)))
                             {
-                                item.Quality = item.Quality - 1;
+                                item.Quality -= 1;
                             }
                         }
                     }
                     else
                     {
-                        item.Quality = item.Quality - item.Quality;
+                        item.Quality -= item.Quality;
                     }
                 }
                 else
                 {
                     if (item.Quality < 50)
                     {
-                        item.Quality = item.Quality + 1;
+                        item.Quality += 1;
                     }
                 }
             }
