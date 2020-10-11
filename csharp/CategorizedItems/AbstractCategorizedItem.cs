@@ -2,6 +2,8 @@
 {
     public abstract class AbstractCategorizedItem : ICategorizedItem
     {
+        protected const int ExpiredSaleRate = 2;
+
         protected AbstractCategorizedItem(Item item)
         {
             Item = item;
