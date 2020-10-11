@@ -31,7 +31,7 @@ namespace csharp
                 {
                     if (!IsSulfurasItem(item))
                     {
-                        item.Quality -= 1;
+                        ItemQualityDecrement(item);
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace csharp
             {
                 if (item.Quality < 50)
                 {
-                    item.Quality += 1;
+                    ItemQualityIncrement(item);
 
                     if (IsBackstagePassesItem(item))
                     {
@@ -47,7 +47,7 @@ namespace csharp
                         {
                             if (item.Quality < 50)
                             {
-                                item.Quality += 1;
+                                ItemQualityIncrement(item);
                             }
                         }
 
@@ -55,7 +55,7 @@ namespace csharp
                         {
                             if (item.Quality < 50)
                             {
-                                item.Quality += 1;
+                                ItemQualityIncrement(item);
                             }
                         }
                     }
@@ -77,7 +77,7 @@ namespace csharp
                         {
                             if (!(IsSulfurasItem(item)))
                             {
-                                item.Quality -= 1;
+                                ItemQualityDecrement(item);
                             }
                         }
                     }
@@ -90,10 +90,20 @@ namespace csharp
                 {
                     if (item.Quality < 50)
                     {
-                        item.Quality += 1;
+                        ItemQualityIncrement(item);
                     }
                 }
             }
+        }
+
+        private static void ItemQualityIncrement(Item item)
+        {
+            item.Quality += 1;
+        }
+
+        private static void ItemQualityDecrement(Item item)
+        {
+            item.Quality -= 1;
         }
 
         private static bool IsSulfurasItem(Item item)
