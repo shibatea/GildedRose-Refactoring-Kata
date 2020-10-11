@@ -7,148 +7,262 @@ namespace XUnitTestProject
 {
     public class GildedRoseTest
     {
-        [Fact]
-        public void ItemNameがHogeの場合()
+        public class ItemがNormalの場合
         {
-            // Arrange
-            var gildedRose = new GildedRose(new List<Item>
+            public class Qualityが0より多い場合
             {
-                new Item
+                [Fact]
+                public void SellInが0より多い場合はItemのQualityが1減る()
                 {
-                    Name = "hoge",
-                    Quality = 0,
-                    SellIn = 0
+                    // Arrange
+                    var gildedRose = new GildedRose(new List<Item>
+                    {
+                        new Item
+                        {
+                            Name = "Normal",
+                            Quality = 10,
+                            SellIn = 10
+                        }
+                    });
+
+                    // Act
+                    gildedRose.UpdateQuality();
+
+                    // Assert
+                    var actualItem = gildedRose.Items[0];
+                    Assert.Equal("Normal", actualItem.Name);
+                    Assert.Equal(9, actualItem.Quality);
+                    Assert.Equal(9, actualItem.SellIn);
                 }
-            });
 
-            // Act
-            gildedRose.UpdateQuality();
+                [Fact]
+                public void SellInが0以下の場合はItemのQualityが2減る()
+                {
+                    // Arrange
+                    var gildedRose = new GildedRose(new List<Item>
+                    {
+                        new Item
+                        {
+                            Name = "Normal",
+                            Quality = 10,
+                            SellIn = 0
+                        }
+                    });
 
-            // Assert
-            var actualItem = gildedRose.Items[0];
-            Assert.Equal("hoge", actualItem.Name);
-            Assert.Equal(0,actualItem.Quality);
-            Assert.Equal(-1,actualItem.SellIn);
+                    // Act
+                    gildedRose.UpdateQuality();
+
+                    // Assert
+                    var actualItem = gildedRose.Items[0];
+                    Assert.Equal("Normal", actualItem.Name);
+                    Assert.Equal(8, actualItem.Quality);
+                    Assert.Equal(-1, actualItem.SellIn);
+                }
+
+                [Fact]
+                public void Qualityが1でSellInが0以下の場合はItemのQualityが1減る()
+                {
+                    // Arrange
+                    var gildedRose = new GildedRose(new List<Item>
+                    {
+                        new Item
+                        {
+                            Name = "Normal",
+                            Quality = 1,
+                            SellIn = 0
+                        }
+                    });
+
+                    // Act
+                    gildedRose.UpdateQuality();
+
+                    // Assert
+                    var actualItem = gildedRose.Items[0];
+                    Assert.Equal("Normal", actualItem.Name);
+                    Assert.Equal(0, actualItem.Quality);
+                    Assert.Equal(-1, actualItem.SellIn);
+                }
+            }
+
+            public class Qualityが0の場合
+            {
+                [Fact]
+                public void ItemのQualityは変わらない()
+                {
+                    // Arrange
+                    var gildedRose = new GildedRose(new List<Item>
+                    {
+                        new Item
+                        {
+                            Name = "Normal",
+                            Quality = 0,
+                            SellIn = 10
+                        }
+                    });
+
+                    // Act
+                    gildedRose.UpdateQuality();
+
+                    // Assert
+                    var actualItem = gildedRose.Items[0];
+                    Assert.Equal("Normal", actualItem.Name);
+                    Assert.Equal(0, actualItem.Quality);
+                    Assert.Equal(9, actualItem.SellIn);
+                }
+            }
         }
 
-        [Fact]
-        public void ItemNameがHogeの場合Qualityが10()
+        public class ItemNameがAgedBrieの場合
         {
-            // Arrange
-            var gildedRose = new GildedRose(new List<Item>
+            [Fact]
+            public void SellInが0より大きい場合はItemのQualityが1増える()
             {
-                new Item
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
                 {
-                    Name = "hoge",
-                    Quality = 10,
-                    SellIn = 0
-                }
-            });
+                    new Item
+                    {
+                        Name = "Aged Brie",
+                        Quality = 10,
+                        SellIn = 10
+                    }
+                });
 
-            // Act
-            gildedRose.UpdateQuality();
+                // Act
+                gildedRose.UpdateQuality();
 
-            // Assert
-            var actualItem = gildedRose.Items[0];
-            Assert.Equal("hoge", actualItem.Name);
-            Assert.Equal(8, actualItem.Quality);
-            Assert.Equal(-1, actualItem.SellIn);
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Aged Brie", actualItem.Name);
+                Assert.Equal(11, actualItem.Quality);
+                Assert.Equal(9, actualItem.SellIn);
+            }
+
+            [Fact]
+            public void SellInが0以下の場合はItemのQualityが2増える()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Aged Brie",
+                        Quality = 10,
+                        SellIn = 0
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Aged Brie", actualItem.Name);
+                Assert.Equal(12, actualItem.Quality);
+                Assert.Equal(-1, actualItem.SellIn);
+            }
         }
 
-        [Fact]
-        public void ItemNameがAgedBrieの場合()
+        public class ItemNameがBackstagePassesの場合
         {
-            // Arrange
-            var gildedRose = new GildedRose(new List<Item>
+            [Fact]
+            public void SellInが11以上の場合はItemのQualityが1増える()
             {
-                new Item
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
                 {
-                    Name = "Aged Brie",
-                    Quality = 0,
-                    SellIn = 0
-                }
-            });
+                    new Item
+                    {
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = 10,
+                        SellIn = 11
+                    }
+                });
 
-            // Act
-            gildedRose.UpdateQuality();
+                // Act
+                gildedRose.UpdateQuality();
 
-            // Assert
-            var actualItem = gildedRose.Items[0];
-            Assert.Equal("Aged Brie", actualItem.Name);
-            Assert.Equal(2, actualItem.Quality);
-            Assert.Equal(-1, actualItem.SellIn);
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
+                Assert.Equal(11, actualItem.Quality);
+                Assert.Equal(10, actualItem.SellIn);
+            }
+
+            [Fact]
+            public void SellInが6以上の場合はItemのQualityが2増える()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = 10,
+                        SellIn = 6
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
+                Assert.Equal(12, actualItem.Quality);
+                Assert.Equal(5, actualItem.SellIn);
+            }
+
+            [Fact]
+            public void SellInが6未満の場合はItemのQualityが3増える()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Backstage passes to a TAFKAL80ETC concert",
+                        Quality = 10,
+                        SellIn = 5
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
+                Assert.Equal(13, actualItem.Quality);
+                Assert.Equal(4, actualItem.SellIn);
+            }
         }
 
-        [Fact]
-        public void ItemNameがBackstagePassesの場合()
+        public class ItemNameがSulfurasの場合
         {
-            // Arrange
-            var gildedRose = new GildedRose(new List<Item>
+            [Fact]
+            public void Itemの値は変わらない()
             {
-                new Item
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
                 {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    Quality = 0,
-                    SellIn = 0
-                }
-            });
+                    new Item
+                    {
+                        Name = "Sulfuras, Hand of Ragnaros",
+                        Quality = 49,
+                        SellIn = 10
+                    }
+                });
 
-            // Act
-            gildedRose.UpdateQuality();
+                // Act
+                gildedRose.UpdateQuality();
 
-            // Assert
-            var actualItem = gildedRose.Items[0];
-            Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
-            Assert.Equal(0, actualItem.Quality);
-            Assert.Equal(-1, actualItem.SellIn);
-        }
-        
-        [Fact]
-        public void ItemNameがBackstagePassesの場合SellInが10の場合()
-        {
-            // Arrange
-            var gildedRose = new GildedRose(new List<Item>
-            {
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    Quality = 0,
-                    SellIn = 10
-                }
-            });
-
-            // Act
-            gildedRose.UpdateQuality();
-
-            // Assert
-            var actualItem = gildedRose.Items[0];
-            Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
-            Assert.Equal(2, actualItem.Quality);
-            Assert.Equal(9, actualItem.SellIn);
-        }
-
-        [Fact]
-        public void ItemNameがSulfurasの場合()
-        {
-            // Arrange
-            var gildedRose = new GildedRose(new List<Item>
-            {
-                new Item
-                {
-                    Name = "Sulfuras, Hand of Ragnaros",
-                    Quality = 30,
-                    SellIn = 10
-                }
-            });
-
-            // Act
-            gildedRose.UpdateQuality();
-
-            // Assert
-            var actualItem = gildedRose.Items[0];
-            Assert.Equal("Sulfuras, Hand of Ragnaros", actualItem.Name);
-            Assert.Equal(30, actualItem.Quality);
-            Assert.Equal(10, actualItem.SellIn);
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Sulfuras, Hand of Ragnaros", actualItem.Name);
+                Assert.Equal(49, actualItem.Quality);
+                Assert.Equal(10, actualItem.SellIn);
+            }
         }
     }
 }
