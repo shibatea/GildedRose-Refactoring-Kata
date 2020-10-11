@@ -25,73 +25,74 @@ namespace csharp
 
         private static void UpdateItem(Item item)
         {
-            if (!IsAgedBrieItem(item) && !IsBackstagePassesItem(item))
+            if (IsSulfurasItem(item)) return;
+
+            if (IsAgedBrieItem(item))
             {
-                if (item.Quality > 0)
+                if (item.Quality < 50)
                 {
-                    if (!IsSulfurasItem(item))
+                    ItemQualityIncrement(item);
+                }
+            }
+            else
+            {
+                if (IsBackstagePassesItem(item))
+                {
+                    if (item.Quality < 50)
+                    {
+                        ItemQualityIncrement(item);
+
+                        if (IsBackstagePassesItem(item))
+                        {
+                            if (item.SellIn < 11)
+                            {
+                                if (item.Quality < 50)
+                                {
+                                    ItemQualityIncrement(item);
+                                }
+                            }
+
+                            if (item.SellIn < 6)
+                            {
+                                if (item.Quality < 50)
+                                {
+                                    ItemQualityIncrement(item);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (item.Quality > 0)
                     {
                         ItemQualityDecrement(item);
                     }
                 }
             }
-            else
+
+            item.SellIn -= 1;
+
+            if (item.SellIn >= 0) return;
+
+            if (IsAgedBrieItem(item))
             {
                 if (item.Quality < 50)
                 {
                     ItemQualityIncrement(item);
-
-                    if (IsBackstagePassesItem(item))
-                    {
-                        if (item.SellIn < 11)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                ItemQualityIncrement(item);
-                            }
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                ItemQualityIncrement(item);
-                            }
-                        }
-                    }
                 }
             }
-
-            if (!(IsSulfurasItem(item)))
+            else
             {
-                item.SellIn -= 1;
-            }
-
-            if (item.SellIn < 0)
-            {
-                if (!(IsAgedBrieItem(item)))
+                if (IsBackstagePassesItem(item))
                 {
-                    if (!(IsBackstagePassesItem(item)))
-                    {
-                        if (item.Quality > 0)
-                        {
-                            if (!(IsSulfurasItem(item)))
-                            {
-                                ItemQualityDecrement(item);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        item.Quality -= item.Quality;
-                    }
+                    item.Quality -= item.Quality;
                 }
                 else
                 {
-                    if (item.Quality < 50)
-                    {
-                        ItemQualityIncrement(item);
-                    }
+                    if (item.Quality <= 0) return;
+
+                    ItemQualityDecrement(item);
                 }
             }
         }
