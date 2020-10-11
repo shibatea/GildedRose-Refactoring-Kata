@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using csharp.ItemUpdater;
+using csharp.CategorizedItems;
 
 namespace csharp
 {

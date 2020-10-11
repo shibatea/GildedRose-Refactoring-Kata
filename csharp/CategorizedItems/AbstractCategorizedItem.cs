@@ -1,4 +1,4 @@
-﻿namespace csharp.ItemUpdater
+﻿namespace csharp.CategorizedItems
 {
     public abstract class AbstractCategorizedItem : ICategorizedItem
     {

@@ -1,8 +1,8 @@
-﻿namespace csharp.ItemUpdater
+﻿namespace csharp.CategorizedItems
 {
-    public class AgedBrieItem : AbstractCategorizedItem
+    public class BackstagePassesItem : AbstractCategorizedItem
     {
-        public AgedBrieItem(Item item) : base(item)
+        public BackstagePassesItem(Item item) : base(item)
         {
         }
 
@@ -15,12 +15,13 @@
         {
             if (Item.IsExpiredSale())
             {
-                Item.QualityIncrement();
-                Item.QualityIncrement();
+                Item.QualityDropsToZero();
             }
             else
             {
                 Item.QualityIncrement();
+                if (Item.SellIn < 10) Item.QualityIncrement();
+                if (Item.SellIn < 5) Item.QualityIncrement();
             }
         }
     }

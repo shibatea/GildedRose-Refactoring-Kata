@@ -65,14 +65,14 @@
     <Compile Include="GildedRose.cs" />
     <Compile Include="GildedRoseTest.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="ItemUpdater\AbstractCategorizedItem.cs" />
-    <Compile Include="ItemUpdater\AgedBrieItem.cs" />
-    <Compile Include="ItemUpdater\BackstagePassesItem.cs" />
-    <Compile Include="ItemUpdater\CategorizedItemFactory.cs" />
-    <Compile Include="ItemUpdater\ICategorizedItem.cs" />
-    <Compile Include="ItemUpdater\NormalItem.cs" />
-    <Compile Include="ItemUpdater\SulfurasItem.cs" />
-    <Compile Include="ItemUpdater\ItemExtensions.cs" />
+    <Compile Include="CategorizedItems\AbstractCategorizedItem.cs" />
+    <Compile Include="CategorizedItems\AgedBrieItem.cs" />
+    <Compile Include="CategorizedItems\BackstagePassesItem.cs" />
+    <Compile Include="CategorizedItems\CategorizedItemFactory.cs" />
+    <Compile Include="CategorizedItems\ICategorizedItem.cs" />
+    <Compile Include="CategorizedItems\NormalItem.cs" />
+    <Compile Include="CategorizedItems\SulfurasItem.cs" />
+    <Compile Include="CategorizedItems\ItemExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
