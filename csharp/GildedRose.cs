@@ -21,11 +21,15 @@ namespace csharp
 
         private static void UpdateItem(Item item)
         {
-            if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
+            const string sulfuras = "Sulfuras, Hand of Ragnaros";
+            const string agedBrie = "Aged Brie";
+            const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+            
+            if (item.Name != agedBrie && item.Name != backstagePasses)
             {
                 if (item.Quality > 0)
                 {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
+                    if (item.Name != sulfuras)
                     {
                         item.Quality = item.Quality - 1;
                     }
@@ -37,7 +41,7 @@ namespace csharp
                 {
                     item.Quality = item.Quality + 1;
 
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.Name == backstagePasses)
                     {
                         if (item.SellIn < 11)
                         {
@@ -58,20 +62,20 @@ namespace csharp
                 }
             }
 
-            if (item.Name != "Sulfuras, Hand of Ragnaros")
+            if (item.Name != sulfuras)
             {
                 item.SellIn = item.SellIn - 1;
             }
 
             if (item.SellIn < 0)
             {
-                if (item.Name != "Aged Brie")
+                if (item.Name != agedBrie)
                 {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.Name != backstagePasses)
                     {
                         if (item.Quality > 0)
                         {
-                            if (item.Name != "Sulfuras, Hand of Ragnaros")
+                            if (item.Name != sulfuras)
                             {
                                 item.Quality = item.Quality - 1;
                             }
