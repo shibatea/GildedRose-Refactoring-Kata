@@ -17,8 +17,8 @@
             UpdateSellIn();
         }
 
-        protected abstract void UpdateSellIn();
-
         protected abstract void UpdateQuality();
+
+        protected abstract void UpdateSellIn();
     }
 }

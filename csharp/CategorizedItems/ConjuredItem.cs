@@ -6,11 +6,6 @@
         {
         }
 
-        protected override void UpdateSellIn()
-        {
-            Item.SellInDecrement();
-        }
-
         protected override void UpdateQuality()
         {
             const int qualityDegradationRate = 2;
@@ -23,6 +18,11 @@
             {
                 Item.QualityDecrement(qualityDegradationRate);
             }
+        }
+
+        protected override void UpdateSellIn()
+        {
+            Item.SellInDecrement();
         }
     }
 }

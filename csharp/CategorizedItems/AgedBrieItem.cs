@@ -6,11 +6,6 @@
         {
         }
 
-        protected override void UpdateSellIn()
-        {
-            Item.SellInDecrement();
-        }
-
         protected override void UpdateQuality()
         {
             if (Item.IsExpiredSale())
@@ -21,6 +16,11 @@
             {
                 Item.QualityIncrement();
             }
+        }
+
+        protected override void UpdateSellIn()
+        {
+            Item.SellInDecrement();
         }
     }
 }

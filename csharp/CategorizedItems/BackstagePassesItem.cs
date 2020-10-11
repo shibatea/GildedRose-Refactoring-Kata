@@ -8,11 +8,6 @@ namespace csharp.CategorizedItems
         {
         }
 
-        protected override void UpdateSellIn()
-        {
-            Item.SellInDecrement();
-        }
-
         protected override void UpdateQuality()
         {
             if (Item.IsExpiredSale())
@@ -25,6 +20,11 @@ namespace csharp.CategorizedItems
                 else if (Item.SellIn <= 10) Item.QualityIncrement(2);
                 else if (Item.SellIn > 10) Item.QualityIncrement();
             }
+        }
+
+        protected override void UpdateSellIn()
+        {
+            Item.SellInDecrement();
         }
     }
 }

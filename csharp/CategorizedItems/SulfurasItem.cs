@@ -6,11 +6,11 @@
         {
         }
 
-        protected override void UpdateSellIn()
+        protected override void UpdateQuality()
         {
         }
 
-        protected override void UpdateQuality()
+        protected override void UpdateSellIn()
         {
         }
     }
