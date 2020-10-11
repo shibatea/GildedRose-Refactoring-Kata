@@ -20,8 +20,8 @@
             else
             {
                 Item.QualityIncrement();
-                if (Item.SellIn < 10) Item.QualityIncrement();
-                if (Item.SellIn < 5) Item.QualityIncrement();
+                if (Item.SellIn <= 10) Item.QualityIncrement();
+                if (Item.SellIn <= 5) Item.QualityIncrement();
             }
         }
     }

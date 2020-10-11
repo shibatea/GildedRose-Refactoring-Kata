@@ -4,7 +4,7 @@
     {
         public static bool IsExpiredSale(this Item item)
         {
-            return item.SellIn < 0;
+            return item.SellIn <= 0;
         }
 
         public static void QualityDropsToZero(this Item item)

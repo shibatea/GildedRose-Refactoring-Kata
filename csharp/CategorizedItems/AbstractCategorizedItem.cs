@@ -11,8 +11,8 @@
 
         public void Update()
         {
-            UpdateSellIn();
             UpdateQuality();
+            UpdateSellIn();
         }
 
         protected abstract void UpdateSellIn();
