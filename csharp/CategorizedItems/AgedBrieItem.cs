@@ -15,8 +15,7 @@
         {
             if (Item.IsExpiredSale())
             {
-                Item.QualityIncrement();
-                Item.QualityIncrement();
+                Item.QualityIncrement(ExpiredSaleRate);
             }
             else
             {

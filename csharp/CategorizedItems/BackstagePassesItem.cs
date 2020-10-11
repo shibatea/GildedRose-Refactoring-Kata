@@ -1,4 +1,6 @@
-﻿namespace csharp.CategorizedItems
+﻿using System;
+
+namespace csharp.CategorizedItems
 {
     public class BackstagePassesItem : AbstractCategorizedItem
     {
@@ -19,9 +21,9 @@
             }
             else
             {
-                Item.QualityIncrement();
-                if (Item.SellIn <= 10) Item.QualityIncrement();
-                if (Item.SellIn <= 5) Item.QualityIncrement();
+                if (Item.SellIn <= 5) Item.QualityIncrement(3);
+                else if (Item.SellIn <= 10) Item.QualityIncrement(2);
+                else if (Item.SellIn > 10) Item.QualityIncrement();
             }
         }
     }
