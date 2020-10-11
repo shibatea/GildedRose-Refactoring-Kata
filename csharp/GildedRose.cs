@@ -4,6 +4,10 @@ namespace csharp
 {
     public class GildedRose
     {
+        const string sulfuras = "Sulfuras, Hand of Ragnaros";
+        const string agedBrie = "Aged Brie";
+        const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+
         public readonly IList<Item> Items;
 
         public GildedRose(IList<Item> items)
@@ -21,15 +25,11 @@ namespace csharp
 
         private static void UpdateItem(Item item)
         {
-            const string sulfuras = "Sulfuras, Hand of Ragnaros";
-            const string agedBrie = "Aged Brie";
-            const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-            
-            if (!(item.Name == agedBrie) && !(item.Name == backstagePasses))
+            if (!IsAgedBrieItem(item) && !IsBackstagePassesItem(item))
             {
                 if (item.Quality > 0)
                 {
-                    if (!(item.Name == sulfuras))
+                    if (!IsSulfurasItem(item))
                     {
                         item.Quality = item.Quality - 1;
                     }
@@ -41,7 +41,7 @@ namespace csharp
                 {
                     item.Quality = item.Quality + 1;
 
-                    if (item.Name == backstagePasses)
+                    if (IsBackstagePassesItem(item))
                     {
                         if (item.SellIn < 11)
                         {
@@ -62,20 +62,20 @@ namespace csharp
                 }
             }
 
-            if (!(item.Name == sulfuras))
+            if (!(IsSulfurasItem(item)))
             {
                 item.SellIn = item.SellIn - 1;
             }
 
             if (item.SellIn < 0)
             {
-                if (!(item.Name == agedBrie))
+                if (!(IsAgedBrieItem(item)))
                 {
-                    if (!(item.Name == backstagePasses))
+                    if (!(IsBackstagePassesItem(item)))
                     {
                         if (item.Quality > 0)
                         {
-                            if (!(item.Name == sulfuras))
+                            if (!(IsSulfurasItem(item)))
                             {
                                 item.Quality = item.Quality - 1;
                             }
@@ -94,6 +94,21 @@ namespace csharp
                     }
                 }
             }
+        }
+
+        private static bool IsSulfurasItem(Item item)
+        {
+            return item.Name == sulfuras;
+        }
+
+        private static bool IsBackstagePassesItem(Item item)
+        {
+            return item.Name == backstagePasses;
+        }
+
+        private static bool IsAgedBrieItem(Item item)
+        {
+            return item.Name == agedBrie;
         }
     }
 }
