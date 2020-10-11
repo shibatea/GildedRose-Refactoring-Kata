@@ -282,5 +282,104 @@ namespace XUnitTestProject
                 Assert.Equal(10, actualItem.SellIn);
             }
         }
+
+        public class ItemがConjuredの場合
+        {
+            [Fact]
+            public void SellInが0日より多い場合はItemのQualityが2減る()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Conjured",
+                        Quality = 10,
+                        SellIn = 10
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Conjured", actualItem.Name);
+                Assert.Equal(8, actualItem.Quality);
+                Assert.Equal(9, actualItem.SellIn);
+            }
+
+            [Fact]
+            public void SellInが0日以下の場合はItemのQualityが4減る()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Conjured",
+                        Quality = 10,
+                        SellIn = 0
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Conjured", actualItem.Name);
+                Assert.Equal(6, actualItem.Quality);
+                Assert.Equal(-1, actualItem.SellIn);
+            }
+
+            [Fact]
+            public void SellInが0日以下でQualityが1の場合はItemのQualityが1減る()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Conjured",
+                        Quality = 1,
+                        SellIn = 0
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Conjured", actualItem.Name);
+                Assert.Equal(0, actualItem.Quality);
+                Assert.Equal(-1, actualItem.SellIn);
+            }
+
+            [Fact]
+            public void Qualityが0の場合ItemのQualityは変わらない()
+            {
+                // Arrange
+                var gildedRose = new GildedRose(new List<Item>
+                {
+                    new Item
+                    {
+                        Name = "Conjured",
+                        Quality = 0,
+                        SellIn = 10
+                    }
+                });
+
+                // Act
+                gildedRose.UpdateQuality();
+
+                // Assert
+                var actualItem = gildedRose.Items[0];
+                Assert.Equal("Conjured", actualItem.Name);
+                Assert.Equal(0, actualItem.Quality);
+                Assert.Equal(9, actualItem.SellIn);
+            }
+        }
     }
 }
