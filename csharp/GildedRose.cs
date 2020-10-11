@@ -25,11 +25,11 @@ namespace csharp
             const string agedBrie = "Aged Brie";
             const string backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
             
-            if (item.Name != agedBrie && item.Name != backstagePasses)
+            if (!(item.Name == agedBrie) && !(item.Name == backstagePasses))
             {
                 if (item.Quality > 0)
                 {
-                    if (item.Name != sulfuras)
+                    if (!(item.Name == sulfuras))
                     {
                         item.Quality = item.Quality - 1;
                     }
@@ -62,20 +62,20 @@ namespace csharp
                 }
             }
 
-            if (item.Name != sulfuras)
+            if (!(item.Name == sulfuras))
             {
                 item.SellIn = item.SellIn - 1;
             }
 
             if (item.SellIn < 0)
             {
-                if (item.Name != agedBrie)
+                if (!(item.Name == agedBrie))
                 {
-                    if (item.Name != backstagePasses)
+                    if (!(item.Name == backstagePasses))
                     {
                         if (item.Quality > 0)
                         {
-                            if (item.Name != sulfuras)
+                            if (!(item.Name == sulfuras))
                             {
                                 item.Quality = item.Quality - 1;
                             }
