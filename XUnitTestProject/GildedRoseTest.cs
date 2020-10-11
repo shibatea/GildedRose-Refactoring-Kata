@@ -8,7 +8,7 @@ namespace XUnitTestProject
     public class GildedRoseTest
     {
         [Fact]
-        public void Test1()
+        public void ItemNameÇ™HogeÇÃèÍçá()
         {
             // Arrange
             var gildedRose = new GildedRose(new List<Item>
@@ -16,8 +16,8 @@ namespace XUnitTestProject
                 new Item
                 {
                     Name = "hoge",
-                    Quality = 30,
-                    SellIn = 10
+                    Quality = 0,
+                    SellIn = 0
                 }
             });
 
@@ -27,8 +27,8 @@ namespace XUnitTestProject
             // Assert
             var actualItem = gildedRose.Items[0];
             Assert.Equal("hoge", actualItem.Name);
-            Assert.Equal(29,actualItem.Quality);
-            Assert.Equal(9,actualItem.SellIn);
+            Assert.Equal(0,actualItem.Quality);
+            Assert.Equal(-1,actualItem.SellIn);
         }
     }
 }
