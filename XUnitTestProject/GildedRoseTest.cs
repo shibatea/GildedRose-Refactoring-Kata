@@ -262,18 +262,18 @@ namespace XUnitTestProject
             }
 
             [Fact]
-            public void SellInが0日以下でQualityが3以下の場合にUpdateQualityを実行してもQualityが0より小さくならない()
+            public void Qualityが1以下の場合にUpdateQualityを実行してもQualityが0より小さくならない()
             {
-                var items = new List<Item> {new Item {Name = "Conjured", Quality = 3, SellIn = 0}};
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 1, SellIn = 10}};
                 var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
                 Assert.Equal(0, gildedRose.Items[0].Quality);
             }
 
             [Fact]
-            public void Qualityが1以下の場合にUpdateQualityを実行してもQualityより小さくならない()
+            public void SellInが0日以下でQualityが3以下の場合にUpdateQualityを実行してもQualityが0より小さくならない()
             {
-                var items = new List<Item> {new Item {Name = "Conjured", Quality = 1, SellIn = 10}};
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 3, SellIn = 0}};
                 var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
                 Assert.Equal(0, gildedRose.Items[0].Quality);
