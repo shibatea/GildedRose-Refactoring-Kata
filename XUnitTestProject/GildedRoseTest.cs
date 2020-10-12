@@ -42,7 +42,7 @@ namespace XUnitTestProject
             }
 
             [Fact]
-            public void UpdateQualityを実行するとSellInが0日以下の場合はQualityが2減る()
+            public void SellInが0日以下の場合にUpdateQualityを実行するとQualityが2減る()
             {
                 var items = new List<Item> {new Item {Name = "Normal", Quality = 10, SellIn = 0}};
                 var gildedRose = new GildedRose(items);
@@ -51,7 +51,7 @@ namespace XUnitTestProject
             }
 
             [Fact]
-            public void UpdateQualityを実行するとSellInが0日以下でQualityが1の場合はQualityが1減る()
+            public void SellInが0日以下でQualityが1の場合にUpdateQualityを実行してもQualityが0より小さくならない()
             {
                 var items = new List<Item> {new Item {Name = "Normal", Quality = 1, SellIn = 0}};
                 var gildedRose = new GildedRose(items);
@@ -60,7 +60,7 @@ namespace XUnitTestProject
             }
 
             [Fact]
-            public void UpdateQualityを実行してもQualityが0の場合はQualityが変わらない()
+            public void Qualityが0の場合にUpdateQualityを実行してもQualityが0より小さくならない()
             {
                 var items = new List<Item> {new Item {Name = "Normal", Quality = 0, SellIn = 10}};
                 var gildedRose = new GildedRose(items);
@@ -69,279 +69,214 @@ namespace XUnitTestProject
             }
         }
 
-        public class ItemNameがAgedBrieの場合
+        public class AgedBrieなItemの場合
         {
             [Fact]
-            public void SellInが0日より大きい場合はItemのQualityが1増える()
+            public void UpdateQualityを実行してもItem名は変わらない()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Aged Brie",
-                        Quality = 10,
-                        SellIn = 10
-                    }
-                });
-
-                // Act
+                var items = new List<Item> {new Item {Name = "Aged Brie", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Aged Brie", actualItem.Name);
-                Assert.Equal(11, actualItem.Quality);
-                Assert.Equal(9, actualItem.SellIn);
+                Assert.Equal("Aged Brie", gildedRose.Items[0].Name);
             }
 
             [Fact]
-            public void SellInが0日以下の場合はItemのQualityが2増える()
+            public void UpdateQualityを実行するとSellInが1減る()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Aged Brie",
-                        Quality = 10,
-                        SellIn = 0
-                    }
-                });
-
-                // Act
+                var items = new List<Item> {new Item {Name = "Aged Brie", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
+                Assert.Equal(9, gildedRose.Items[0].SellIn);
+            }
 
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Aged Brie", actualItem.Name);
-                Assert.Equal(12, actualItem.Quality);
-                Assert.Equal(-1, actualItem.SellIn);
+            [Fact]
+            public void SellInが0日より大きい場合にUpdateQualityを実行するとQualityが1増える()
+            {
+                var items = new List<Item> {new Item {Name = "Aged Brie", Quality = 10, SellIn = 1}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(11, gildedRose.Items[0].Quality);
+            }
+
+            [Fact]
+            public void SellInが0日以下の場合にUpdateQualityを実行するとQualityが2増える()
+            {
+                var items = new List<Item> {new Item {Name = "Aged Brie", Quality = 10, SellIn = 0}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(12, gildedRose.Items[0].Quality);
+            }
+
+            [Fact]
+            public void UpdateQualityを実行してもQualityが50より増えない()
+            {
+                var items = new List<Item> {new Item {Name = "Aged Brie", Quality = 50, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(50, gildedRose.Items[0].Quality);
+            }
+
+            [Fact]
+            public void SellInが0日以下の場合にUpdateQualityを実行してもQualityが50より増えない()
+            {
+                var items = new List<Item> {new Item {Name = "Aged Brie", Quality = 50, SellIn = 0}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(50, gildedRose.Items[0].Quality);
             }
         }
 
-        public class ItemNameがBackstagePassesの場合
+        public class BackstagePassesなItemの場合
         {
             [Fact]
-            public void SellInが10日より多い場合はItemのQualityが1増える()
+            public void UpdateQualityを実行してもItem名は変わらない()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Backstage passes to a TAFKAL80ETC concert",
-                        Quality = 10,
-                        SellIn = 11
-                    }
-                });
-
-                // Act
+                var items = new List<Item>
+                    {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
-                Assert.Equal(11, actualItem.Quality);
-                Assert.Equal(10, actualItem.SellIn);
+                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", gildedRose.Items[0].Name);
             }
 
             [Fact]
-            public void SellInが10日以内の場合はItemのQualityが2増える()
+            public void UpdateQualityを実行するとSellInが1減る()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Backstage passes to a TAFKAL80ETC concert",
-                        Quality = 10,
-                        SellIn = 10
-                    }
-                });
-
-                // Act
+                var items = new List<Item>
+                    {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
-                Assert.Equal(12, actualItem.Quality);
-                Assert.Equal(9, actualItem.SellIn);
+                Assert.Equal(9, gildedRose.Items[0].SellIn);
             }
 
             [Fact]
-            public void SellInが5日より多い場合はItemのQualityが2増える()
+            public void SellInが10日より多い場合にUpdateQualityを実行するとQualityが1増える_境界値_SellInが11()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Backstage passes to a TAFKAL80ETC concert",
-                        Quality = 10,
-                        SellIn = 6
-                    }
-                });
-
-                // Act
+                var items = new List<Item>
+                    {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 11}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
-                Assert.Equal(12, actualItem.Quality);
-                Assert.Equal(5, actualItem.SellIn);
+                Assert.Equal(11, gildedRose.Items[0].Quality);
             }
 
             [Fact]
-            public void SellInが5日以内の場合はItemのQualityが3増える()
+            public void SellInが10日以内かつ5日より多い場合にUpdateQualityを実行するとQualityが2増える_境界値_SellInが10()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Backstage passes to a TAFKAL80ETC concert",
-                        Quality = 10,
-                        SellIn = 5
-                    }
-                });
-
-                // Act
+                var items = new List<Item>
+                    {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
+                Assert.Equal(12, gildedRose.Items[0].Quality);
+            }
 
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Backstage passes to a TAFKAL80ETC concert", actualItem.Name);
-                Assert.Equal(13, actualItem.Quality);
-                Assert.Equal(4, actualItem.SellIn);
+            [Fact]
+            public void SellInが10日以内かつ5日より多い場合にUpdateQualityを実行するとQualityが2増える_境界値_SellInが6()
+            {
+                var items = new List<Item>
+                    {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 6}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(12, gildedRose.Items[0].Quality);
+            }
+
+            [Fact]
+            public void SellInが5日以内の場合にUpdateQualityを実行するとQualityが3増える_境界値_SellInが5()
+            {
+                var items = new List<Item>
+                    {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 5}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(13, gildedRose.Items[0].Quality);
             }
         }
 
-        public class ItemNameがSulfurasの場合
+        public class SulfurasなItemの場合
         {
-            [Fact]
-            public void Itemの値は変わらない()
+            private readonly List<Item> _items;
+
+            public SulfurasなItemの場合()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Sulfuras, Hand of Ragnaros",
-                        Quality = 49,
-                        SellIn = 10
-                    }
-                });
+                _items = new List<Item> {new Item {Name = "Sulfuras, Hand of Ragnaros", Quality = 49, SellIn = 10}};
+            }
 
-                // Act
+            [Fact]
+            public void UpdateQualityを実行してもItem名は変わらない()
+            {
+                var gildedRose = new GildedRose(_items);
                 gildedRose.UpdateQuality();
+                Assert.Equal("Sulfuras, Hand of Ragnaros", gildedRose.Items[0].Name);
+            }
 
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Sulfuras, Hand of Ragnaros", actualItem.Name);
-                Assert.Equal(49, actualItem.Quality);
-                Assert.Equal(10, actualItem.SellIn);
+            [Fact]
+            public void UpdateQualityを実行してもSellInは変わらない()
+            {
+                var gildedRose = new GildedRose(_items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(10, gildedRose.Items[0].SellIn);
+            }
+
+            [Fact]
+            public void UpdateQualityを実行してもQualityは変わらない()
+            {
+                var gildedRose = new GildedRose(_items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(49, gildedRose.Items[0].Quality);
             }
         }
 
-        public class ItemがConjuredの場合
+        public class ConjuredなItemの場合
         {
             [Fact]
-            public void SellInが0日より多い場合はItemのQualityが2減る()
+            public void UpdateQualityを実行してもItem名は変わらない()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Conjured",
-                        Quality = 10,
-                        SellIn = 10
-                    }
-                });
-
-                // Act
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Conjured", actualItem.Name);
-                Assert.Equal(8, actualItem.Quality);
-                Assert.Equal(9, actualItem.SellIn);
+                Assert.Equal("Conjured", gildedRose.Items[0].Name);
             }
 
             [Fact]
-            public void SellInが0日以下の場合はItemのQualityが4減る()
+            public void UpdateQualityを実行するとSellInが1減る()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Conjured",
-                        Quality = 10,
-                        SellIn = 0
-                    }
-                });
-
-                // Act
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Conjured", actualItem.Name);
-                Assert.Equal(6, actualItem.Quality);
-                Assert.Equal(-1, actualItem.SellIn);
+                Assert.Equal(9, gildedRose.Items[0].SellIn);
             }
 
             [Fact]
-            public void SellInが0日以下でQualityが1の場合はItemのQualityが1減る()
+            public void SellInが0日より多い場合にUpdateQualityを実行するとQualityが2減る()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Conjured",
-                        Quality = 1,
-                        SellIn = 0
-                    }
-                });
-
-                // Act
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 10, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
-
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Conjured", actualItem.Name);
-                Assert.Equal(0, actualItem.Quality);
-                Assert.Equal(-1, actualItem.SellIn);
+                Assert.Equal(8, gildedRose.Items[0].Quality);
             }
 
             [Fact]
-            public void Qualityが0の場合ItemのQualityは変わらない()
+            public void SellInが0日以下の場合にUpdateQualityを実行するとQualityが4減る()
             {
-                // Arrange
-                var gildedRose = new GildedRose(new List<Item>
-                {
-                    new Item
-                    {
-                        Name = "Conjured",
-                        Quality = 0,
-                        SellIn = 10
-                    }
-                });
-
-                // Act
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 10, SellIn = 0}};
+                var gildedRose = new GildedRose(items);
                 gildedRose.UpdateQuality();
+                Assert.Equal(6, gildedRose.Items[0].Quality);
+            }
 
-                // Assert
-                var actualItem = gildedRose.Items[0];
-                Assert.Equal("Conjured", actualItem.Name);
-                Assert.Equal(0, actualItem.Quality);
-                Assert.Equal(9, actualItem.SellIn);
+            [Fact]
+            public void SellInが0日以下でQualityが1の場合にUpdateQualityを実行してもQualityが0より小さくならない()
+            {
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 1, SellIn = 0}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(0, gildedRose.Items[0].Quality);
+            }
+
+            [Fact]
+            public void Qualityが0の場合にUpdateQualityを実行してもQualityより小さくならない()
+            {
+                var items = new List<Item> {new Item {Name = "Conjured", Quality = 0, SellIn = 10}};
+                var gildedRose = new GildedRose(items);
+                gildedRose.UpdateQuality();
+                Assert.Equal(0, gildedRose.Items[0].Quality);
             }
         }
     }
